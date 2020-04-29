@@ -1,18 +1,67 @@
 <!DOCTYPE html>
-
 <html>
-<head>
-  <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
-  <title>my-first-website</title>
-  <LINK href="styles.css" rel="stylesheet" type="text/css">
-</head>
+	<head>
+			<title>An other perspective</title>
+	   <script src="https://code.jquery.com/jquery-3.4.1.js"></script>
+     <script type="text/javascript">
+       $(document).ready(function(){
+var textn = 1
+       var story = {
+				"start":{txt: "Most of the time I wake up in the afternoon, since I always stay awake till the early morning.<br>I like this schedule, because its the warmest part of the day, and I'm the type who can sense the cold very easily.<br>But this day was different...",
+				"buttons": [{txt: "Continue", to: "first"}]},
+       "first":{txt: "The air was chill and damp, and it was oddly dark.<br>For a moment I thought, that I slept a little more than usual, but as I looked around, I noticed that that's not my room.",
+  	 		"buttons": [{txt: "Continue", to: "second"}]},
+       "second":{txt: "It was a smaller basement with a bed, a few shelves with compote on it, and a table with 4 chairs around.<br>But I wouldn't call it an average basement...<br>This one had cameras, looking all around the room.<br><img src='https://i.ibb.co/5KsmDT6/camera.png' alt='camera' border='0'><br>Very likely I'm being observed.",
+			 "buttons": [{txt: "Continue", to: "random"}]},
+			 "random":{txt: "You walked in front of him, and told your name, but he still stares the floor.",
+			 "buttons": [{txt: "Do it again", to: "second"},{txt: "remain silent", to: "go"}]},
+       "go":{txt: "Game over!<br><br>Press F5 to start again"}
+       };
 
-<body>
+       $(document).on("click", "button" , function() {
+				 if(Number($(this).parent().attr("id").substring(3)) == textn){ textn++
+				$("#div"+(textn-3)).remove()
+			$(this).siblings("button").css('opacity', '0.1'); $(this).css('opacity', '0.65');
+        var nt =  story[$(this).attr("to")]; // next text
+        var gombok = "";
+        for (i in nt["buttons"]) {
+       gombok = gombok+" <button to="+nt["buttons"][i].to+">"+nt["buttons"][i].txt+"</button> "
+		 }
+         $("body").append("<div id='div"+textn+"'><p>"+nt.txt+"</p>"+gombok+"</div>");
+			 }
+       });
 
-<img src="https://octodex.github.com/images/daftpunktocat-thomas.gif" id="octocat" alt="octocat-gif" />
 
-<!-- Change this code here by copy and pasting your template on line 15 -->
-<p>Welcome to your first GitHub Pages website!</p>
-
-</body>
+       });
+		 </script>
+		 <style>
+				 body{
+					background: url(https://wallpaperaccess.com/full/1779916.jpg);
+					 background-size: auto;
+				 }
+				 div{
+				 text-align: center
+				 }
+				 p,button{
+					 font-weight: bold;
+						color: white;
+				 }
+				 button{
+				 background-color: rgb(21, 37, 26);
+				 }
+				 h5{
+			 color: rgb(50,50,50);
+			 position: fixed;
+	     bottom: 0;
+	     right: 0;
+				}
+				 </style>
+	</head>
+	<body>
+	<div id="div1">
+	   <p>Most of the time I wake up in the afternoon, since I always stay awake till the early morning.<br>I like this schedule, because its the warmest part of the day, and I'm the type who can sense the cold very easily.<br>But this day was different...</p>
+	   <button to="first">Continue</button>
+	  </div>
+		<h5>Pisti</h5>
+	</body>
 </html>
